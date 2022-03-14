@@ -41,9 +41,9 @@ Prerequisites
 inside project root folder run the following commands to build  docker images for frontend and backend
 ```bash
 # build docker image for frontend
-docker build --file=app/DockerFile  -t calcuco .
+docker build --file=tracking-app/DockerFile  -t tracking-app .
 # build docker image for backend
-docker build --file=api/app/DockerFile  -t calcuco-api .
+docker build --file=tracker/DockerFile  -t tracker .
 
 ```
 then run docker compose using the following command
