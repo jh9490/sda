@@ -7,7 +7,10 @@
                     <h2>Filter And Grouping</h2>
                 </div>
                 <div class="flex-1 field">
-                <AutoComplete placeholder="Search By Name" v-model="filter.personName" :suggestions="filteredPersons" @complete="searchPerson($event)" field="name" />
+                <AutoComplete @clear="reset()" @item-select="filterData()" placeholder="Search By Name"
+                 v-model="filter.person" :suggestions="filteredPersons"
+                 @complete="searchPerson($event)" field="name" />
+                 <!-- <Calendar @date-select="filterData()" :showButtonBar="true" v-model="filter.dateRange" selectionMode="range" /> -->
               </div>
             </div>
         </template>
@@ -51,9 +54,14 @@ export default {
     data() {
         return {
             meetingData: null,
+            selectedPerson: null,
+            filteredPersons: null,
             filter: {
                dateRange: "",
-               personName: ""
+               person : {
+                    name: ""
+               }
+
             }
         }
     },
@@ -64,14 +72,25 @@ export default {
 
     },
     async mounted() {
-        await this.getData().then(data => this.meetingData = data);
+        await this.getData("").then(data => this.meetingData = data);
     },
     methods: {
-        getData(event) {
-            return this.$axios.$get(apiUrl + 'meeting/list');
+        getData(query) {
+            return this.$axios.$get(apiUrl + 'meeting/list'  + query);
         },
         getDate(val) {
             return val.split("T")[0];
+        },
+        async searchPerson(event) {
+            const res = await this.$axios.$get(apiUrl + 'person?name=' + event.query);
+            this.filteredPersons = res;
+        },
+        async filterData(){
+            console.log(this.filter);
+          await this.getData("?name=" + this.filter.person.name).then(data => this.meetingData = data);
+        },
+       async reset(){
+            await this.getData("").then(data => this.meetingData = data);
         }
     }
 

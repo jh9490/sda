@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,9 +39,9 @@ public class MeetingController {
     private MeetingService meetingService;
 
     @GetMapping("/list")
-    public List<Meeting> getMeeting() {
+    public List<Meeting> getMeeting(@RequestParam(required = false) String name) {
          meetingService = new  MeetingService();
-         return meetingService.findAll(meetingRepository);
+         return meetingService.findAll(meetingRepository, name);
     } 
 
 

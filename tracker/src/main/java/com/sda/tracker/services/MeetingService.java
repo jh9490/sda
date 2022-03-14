@@ -7,8 +7,12 @@ import com.sda.tracker.repositories.MeetingRepository;
 
 public class MeetingService {
     
-    public List<Meeting> findAll(MeetingRepository meetingRepository){
+    public List<Meeting> findAll(MeetingRepository meetingRepository, String name){
+        if(name != null){
+             return meetingRepository.findByPersonNameContaining(name);
+        }
         return meetingRepository.findAll();
+ 
     }
 }
 
