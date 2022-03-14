@@ -30,6 +30,8 @@ npm run dev
 ```
 Frontend app now running on http://localhost:3000
 
+## If you want to run the application using docker
+
 ## Dockerizing
 
 Prerequisites
