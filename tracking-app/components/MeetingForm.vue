@@ -64,7 +64,7 @@ export default {
             }
         },
         async searchPerson(event) {
-            const res = await this.$axios.$get(apiUrl + 'person');
+            const res = await this.$axios.$get(apiUrl + 'person?name=' + event.query);
             this.filteredPersons = res;
         },
         async save(event) {

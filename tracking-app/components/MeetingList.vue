@@ -1,24 +1,17 @@
 <template>
 <div>
-    <!-- <Card>
+    <Card>
         <template #content>
             <div class="flex card-container align-items-center justify-content-center">
                 <div class="flex-1 field">
                     <h2>Filter And Grouping</h2>
                 </div>
-
-               <div class="flex-1 field">
-                <AutoComplete placeholder="Location" v-model="selectedLocation" :suggestions="filteredLocations" @complete="searchLocation($event)" field="label" />
-            </div>
-             <div class="flex-1 field">
-                <Calendar placeholder="Search By Date Range"  selectionMode="range"  v-model="filter.dateRange" dateFormat="dd-mm-yy" />
-            </div>
-            <div class="flex-1 field">
+                <div class="flex-1 field">
                 <AutoComplete placeholder="Search By Name" v-model="filter.personName" :suggestions="filteredPersons" @complete="searchPerson($event)" field="name" />
-            </div>
+              </div>
             </div>
         </template>
- </Card> -->
+ </Card>
     <DataTable  :value="meetingData" responsiveLayout="scroll">
         <Column field="id" header="ID"></Column>
         <Column field="location.name" header="Location"></Column>

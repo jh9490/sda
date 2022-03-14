@@ -28,9 +28,10 @@ public class PersonController {
 
     @GetMapping
     public ResponseEntity<Iterable<Person>> findAllUsers(@RequestParam(required = false) String dateRange, @RequestParam(required = false) String name) {
-     
-        Iterable<Person> persons = personRepository.findAll();
-
+        Iterable<Person> persons =  personRepository.findAll(); 
+        if(name != null){
+            persons = personRepository.findByNameContaining(name);    
+        }
         return new ResponseEntity<>(persons, HttpStatus.OK);
      }
 
